@@ -17,4 +17,6 @@ $ pip install cookiecutter
 $ cookiecutter https://github.com/xiaomastack/django_api_template
 # 或者
 $ cookiecutter gh:xiaomastack/django_api_template
+# 或者
+$ cookiecutter git@github.com:xiaomastack/django_api_template.git
 ```
