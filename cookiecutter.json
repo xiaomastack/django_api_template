@@ -1,0 +1,11 @@
+{
+  "project_name": "django_api",
+  "debug": "True",
+  "mysql_host": "192.168.1.3",
+  "mysql_port": "3306",
+  "mysql_db": "django_api",
+  "mysql_user": "user",
+  "mysql_password": "password",
+  "local_cache": "True",
+  "cors": "True"
+}
