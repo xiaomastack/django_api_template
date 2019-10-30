@@ -225,8 +225,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'lib.rest_framework_helper.authentication.HTTPSignatureAuthentication',
-        'lib.rest_framework_helper.authentication.ExpiringTokenAuthentication',
+        'lib.rest_framework_extend.authentication.HTTPSignatureAuthentication',
+        'lib.rest_framework_extend.authentication.ExpiringTokenAuthentication',
     ),
 }
 

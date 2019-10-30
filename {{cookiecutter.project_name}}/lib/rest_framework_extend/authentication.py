@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-from rest_framework_httpsignature.authentication import SignatureAuthentication
+import datetime
 from account.models import User
 from django.core.cache import cache
 from django.conf import settings
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import status
 from rest_framework import exceptions
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authentication import TokenAuthentication
 from django.utils.translation import ugettext_lazy as _
-import datetime
+from rest_framework_httpsignature.authentication import SignatureAuthentication
 
 
 class HTTPSignatureAuthentication(SignatureAuthentication):
@@ -55,3 +59,24 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             # Cache token
             cache.set(key, token.user, EXPIRE_MINUTES * 60)
         return (token.user, token)
+
+
+class ObtainExpiringAuthToken(ObtainAuthToken):
+    """Create user token"""
+
+    def post(self, request):
+        EXPIRE_MINUTES = getattr(settings, 'TOKEN_EXPIRE_MINUTES', 1)
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            token, created = Token.objects.get_or_create(
+                user=serializer.validated_data['user'])
+            time_now = datetime.datetime.now()
+            if not created and token.created < time_now - datetime.timedelta(
+                    minutes=EXPIRE_MINUTES):
+                token.delete()
+                token = Token.objects.create(
+                    user=serializer.validated_data['user'])
+                token.created = time_now
+                token.save()
+            return Response({'token': token.key})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from api import hs
-from lib.rest_framework.common import ObtainExpiringAuthToken
+from lib.rest_framework_extend.authentication import ObtainExpiringAuthToken
 
 urlpatterns = [
     url(r'^hs$', hs),
