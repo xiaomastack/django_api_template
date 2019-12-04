@@ -1,7 +1,9 @@
 # Django RestFramework API 项目模板
 - 支持签名认证
-- token(过期)认证
+- 支持token(过期)认证
 - 支持跨域
+- 支持swagger
+- 支持容器部署
 - 命令行操作使用ipython风格
 
 # 使用方法
@@ -75,4 +77,13 @@ $ curl -H "Content-Type: application/json" -X POST -d '{"username":"root","passw
 
 ```
 Authorization -> Token a9992aa866ce447c80e1e3b00f3729e2 
+```
+
+- 容器部署
+
+``` shell
+# 编译镜像(380MB)
+$ docker build --rm -t django_test:0.0.1 .
+# 运行容器
+$ docker run -itd -p 8080:8080 --name=django django_test:0.0.1
 ```
