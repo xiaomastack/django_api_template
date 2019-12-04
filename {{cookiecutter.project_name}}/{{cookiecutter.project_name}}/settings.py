@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'corsheaders',
     'account',
 ]
@@ -229,6 +230,12 @@ REST_FRAMEWORK = {
         'lib.rest_framework_extend.authentication.HTTPSignatureAuthentication',
         'lib.rest_framework_extend.authentication.ExpiringTokenAuthentication',
     ),
+}
+
+# Swagger
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout'
 }
 
 # Local Cache
