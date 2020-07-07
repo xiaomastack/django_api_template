@@ -13,19 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib import admin
 from api import hs
-from lib.rest_framework_extend.token import ObtainExpiringAuthToken
-from rest_framework_swagger.views import get_swagger_view
-
-schema_view = get_swagger_view(title='{{cookiecutter.project_name}} API')
+from libs.rest_framework_extend.token import ObtainExpiringAuthToken
 
 urlpatterns = [
     url(r'^hs/', hs),
-    url(r'^docs/', schema_view, name='docs'),
     url(r'^admin/', admin.site.urls),
-    url(r'^token/', ObtainExpiringAuthToken.as_view(), name='auth_token'),
-    url(r'^api-auth/',
-        include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^token/', ObtainExpiringAuthToken.as_view(), name='auth_token')
 ]

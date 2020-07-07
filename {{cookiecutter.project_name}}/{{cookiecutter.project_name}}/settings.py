@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger',
     'corsheaders',
     'account',
 ]
@@ -53,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'lib.rest_framework_extend.middleware.ApiLoggingMiddleware',
+    'libs.rest_framework_extend.middleware.ApiLoggingMiddleware',
 ]
 
 ROOT_URLCONF = '{{cookiecutter.project_name}}.urls'
@@ -227,15 +226,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'lib.rest_framework_extend.authentication.HTTPSignatureAuthentication',
-        'lib.rest_framework_extend.authentication.ExpiringTokenAuthentication',
+        'libs.rest_framework_extend.authentication.HTTPSignatureAuthentication',
+        'libs.rest_framework_extend.authentication.ExpiringTokenAuthentication',
     ),
-}
-
-# Swagger
-SWAGGER_SETTINGS = {
-    'LOGIN_URL': 'rest_framework:login',
-    'LOGOUT_URL': 'rest_framework:logout'
 }
 
 # Local Cache

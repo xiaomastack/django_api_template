@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from lib.rest_framework_extend.common import gen_random_str
+from libs.rest_framework_extend.common import gen_random_str
 
 
 class User(AbstractUser):
