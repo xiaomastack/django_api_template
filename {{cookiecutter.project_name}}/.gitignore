@@ -1,6 +1,7 @@
 *.swp
 *.pyc
 */migrations/
+*/*/migrations/
 .idea/
 .DS_Store
 db.sqlite3
